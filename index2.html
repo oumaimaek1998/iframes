@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <iframe id="select_frame"
+    onload="myFunction()"
+    title="Inline Frame Example"
+    style="width: 1000px;height: 800px;"
+    src="http://localhost:3000"
+    allow="camera; microphone">
+    </iframe>
+
+
+    <script>
+        var message;
+        window.addEventListener("message", function (e) {
+        message = e.data["message"]
+        redirection()
+        })
+
+        function redirection(){
+        message === "yes" ? ( setTimeout(function(){
+            window.location.href = 'http://localhost:2030/';
+         }, 1000))  : null
+       }
+
+       function pageProcessing() {
+            const iframe = document.getElementById("select_frame");
+            variable = 20;
+                iframe.contentWindow.postMessage(
+                        {
+                            sender: "userid",
+                            message: variable
+                        },
+                        "http://localhost:3000/"
+                    );
+            }
+        
+
+        function myFunction(){
+        window.document.addEventListener('readystatechange', () => {
+            if (window.document.readyState == 'complete') {
+                pageProcessing();
+            }
+        }
+        );}
+
+   </script>
+
+</body>
+
+
+</html>

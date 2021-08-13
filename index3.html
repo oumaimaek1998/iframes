@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    iframe{
+        position: absolute;
+        width: 331px;
+        height: 148px;
+        top: -30px;
+        right: -87px;
+    }
+    #content
+            {
+            position: relative;
+            width: 157px;
+            height: 118px;
+            overflow: hidden;
+            border-radius: 50%;
+            }
+</style>
+<body >
+    <div id="content">
+        <iframe  id="iframe_select" onload="myFunction()" src="http://localhost:5000/" allow="camera; microphone" scrolling="no" frameborder="no" ></iframe>
+    </iframe>
+    </div>
+
+    <script>
+
+        function pageProcessing() {
+            const iframe = document.getElementById("iframe_select");
+                iframe.contentWindow.postMessage(
+                        {
+                            sender: "userid",
+                            message: 20
+                        },
+                        "http://localhost:5000/"
+                    );
+            }
+        
+
+        function myFunction(){
+        window.document.addEventListener('readystatechange', () => {
+            if (window.document.readyState == 'complete') {
+                pageProcessing();
+            }
+        }
+        );}
+       
+   </script>
+
+    
+</body>
+</html>
